@@ -29,7 +29,7 @@ export default function RootLayout() {
     const prepare = async () => {
       try {
         // Simulate some initialization time
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
         setIsReady(true);
       } catch (e) {
         console.warn('Error during app initialization:', e);
