@@ -8,9 +8,6 @@ export default function OnboardingLayout() {
       <Stack.Screen name="screen1"/>
       <Stack.Screen name="screen2"/>
       <Stack.Screen name="screen3"/>
-
-      {/* Auth screen */}
-      <Stack.Screen name="signup" options={{ title: "Sign Up" }} />
     </Stack>
   );
 }
