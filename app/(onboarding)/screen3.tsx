@@ -18,7 +18,7 @@ export default function Screen3() {
     const anim = Animated.loop(
       Animated.sequence([
         Animated.timing(slideAnim, {
-          toValue: -0.5 * screenWidth,
+          toValue: -0.75 * screenWidth,
           duration: 4000,
           useNativeDriver: true,
         }),
@@ -71,19 +71,14 @@ export default function Screen3() {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
     flex: 1,
-    backgroundColor: "#000", // Fallback color
-    overflow: "hidden",
   },
   animatedContainer: {
     flex: 1,
-    width: "200%", // Make container wider to allow sliding to reveal more image content
-    marginLeft: "-20%", // Center the wider container
+    width: "191%", // Make container wider to allow sliding to reveal more image content
   },
   background: {
     flex: 1,
-    position: "relative",
   },
   content: {
     flex: 1,
