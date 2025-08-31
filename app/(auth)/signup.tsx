@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Dimensions, Easing, Image, ImageBackground, Keyboard, StyleSheet, Text, View } from 'react-native';
 import AuthForm from '../../components/AuthForm';
 
 const { width, height } = Dimensions.get('window');
 
 export default function Signup() {
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const formPositionAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const slideAnimation = () => {
@@ -25,6 +27,31 @@ export default function Signup() {
 
     slideAnimation();
   }, [slideAnim]);
+
+  useEffect(() => {
+    const keyboardWillShow = Keyboard.addListener('keyboardDidShow', (e) => {
+      Animated.timing(formPositionAnim, {
+        toValue: -e.endCoordinates.height + 20,
+        duration: 250,
+        easing: Easing.out(Easing.quad),
+        useNativeDriver: true,
+      }).start();
+    });
+
+    const keyboardWillHide = Keyboard.addListener('keyboardDidHide', () => {
+      Animated.timing(formPositionAnim, {
+        toValue: 0,
+        duration: 250,
+        easing: Easing.out(Easing.quad),
+        useNativeDriver: true,
+      }).start();
+    });
+
+    return () => {
+      keyboardWillShow?.remove();
+      keyboardWillHide?.remove();
+    };
+  }, [formPositionAnim]);
 
   const handleSignupSubmit = (data: { fullName?: string; email: string; password: string; confirmPassword?: string }) => {
     console.log('Signup form submitted:', data);
@@ -60,11 +87,18 @@ export default function Signup() {
       </View>
 
       {/* Signup form section */}
-      <View style={styles.formContainer}>
+      <Animated.View
+        style={[
+          styles.formContainer,
+          {
+            transform: [{ translateY: formPositionAnim }],
+          },
+        ]}
+      >
         <Text style={styles.titleText}>Create Account</Text>
         
         <AuthForm mode="signup" onSubmit={handleSignupSubmit} />
-      </View>
+      </Animated.View>
     </View>
   );
 }
@@ -126,6 +160,4 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 10,
   },
-
-
 });
