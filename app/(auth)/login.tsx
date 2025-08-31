@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, Easing, Image, ImageBackground, Keyboard, StyleSheet, Text, View } from 'react-native';
 import AuthForm from '../../components/AuthForm';
@@ -56,6 +57,7 @@ export default function Login() {
   const handleLoginSubmit = (data: { email: string; password: string }) => {
     console.log('Login form submitted:', data);
     // TODO: Implement actual login logic here
+    router.replace('/(tabs)');
   };
 
   return (
