@@ -1,8 +1,7 @@
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { Image } from 'expo-image';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Animated, Dimensions, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 

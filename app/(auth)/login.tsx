@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Dimensions, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import AuthForm from '../../components/AuthForm';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,6 +25,11 @@ export default function Login() {
 
     slideAnimation();
   }, [slideAnim]);
+
+  const handleLoginSubmit = (data: { email: string; password: string }) => {
+    console.log('Login form submitted:', data);
+    // TODO: Implement actual login logic here
+  };
 
   return (
     <View style={styles.container}>
@@ -57,23 +63,7 @@ export default function Login() {
       <View style={styles.formContainer}>
         <Text style={styles.welcomeText}>Welcome Back!</Text>
         
-        <View style={styles.formFields}>
-          {/* Placeholder for email input */}
-          <View style={styles.inputPlaceholder}>
-            <Text style={styles.inputPlaceholderText}>Email</Text>
-          </View>
-          
-          {/* Placeholder for password input */}
-          <View style={styles.inputPlaceholder}>
-            <Text style={styles.inputPlaceholderText}>Password</Text>
-          </View>
-        </View>
-        
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginButtonText}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
+        <AuthForm mode="login" onSubmit={handleLoginSubmit} />
       </View>
     </View>
   );
@@ -136,40 +126,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 10,
   },
-  formFields: {
-    width: '100%',
-    marginBottom: 30,
-    gap: 15,
-  },
-  inputPlaceholder: {
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
-  },
-  inputPlaceholderText: {
-    color: 'rgba(255,255,255,0.7)',
-    fontSize: 16,
-  },
-  buttonContainer: {
-    width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    gap: 15,
-  },
-  loginButton: {
-    backgroundColor: '#0C6DFF',
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 8,
-  },
-  loginButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    margin: "auto"
-  },
+
 
 });
